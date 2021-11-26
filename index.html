@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+
+        *{
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        .atm-card-form input{
+            -webkit-appearance: none;
+        }
+        .atm-card-form input:focus{
+            outline: none;
+        }
+        .atm-card-form input::-webkit-outer-spin-button,
+        .atm-card-form input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.atm-card-form input[type=number] {
+  -moz-appearance: textfield;
+}
+        .card{
+            margin-top: 30px;
+            text-align: center;
+            width: fit-content;
+            box-shadow: 0px 15px 25px rgb(168 96 0/10%);
+        }
+        .card .card-body{
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        #Card{
+            color:lightgrey;
+            border: 0px;
+            width: 100%;
+            font-size: 15px;
+        }
+        #expiry{
+            color: lightgray;
+            width: 70px;
+            border: 0px;
+            font-size: 15px;
+            text-align: center;
+        }
+        #CVV{
+            color:lightgrey;
+            text-align: center;
+            width: 38px;
+            font-size: 15px;
+            border: 0px;
+            margin-left: 20px;
+            margin-right: 10px;
+        }
+        figure img{
+            width: 27px;
+            margin-right: 10px;
+        }
+        .card .design{
+            display: inline-flex;
+            align-items: flex-start;
+        }
+        .card .card-text{
+            display: inline-flex;
+            margin-right: 25px;
+            margin-top: 13px;
+            font-size: 15px;
+        }
+
+        @media(max-width:560px){
+            .container{
+                width: max-content;
+            }
+        }
+        @media(max-width:375px){
+            .container{
+                width: max-content;
+                
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card atm-card-form">
+            <div class="card-body">
+                <div class="card-text">Card</div>
+                  <div class="design">
+                    <figure>
+                        <img src="cred.jfif" alt="card_image">
+                    </figure>
+                <input type="text" name="Card" id="Card" placeholder="Card Number" maxlength="19">
+                  </div>
+                <input type="text" name="Expiry" id="expiry" placeholder="MM/YY" maxlength="5">
+                <input type="text" name="CVV" id="CVV" placeholder="CVV" maxlength="3">
+
+                    </div>
+    </div>
+    </div>
+    <script>
+$('#Card').on('keypress change', function () {
+  $(this).val(function (index, value) {
+    return value.replace(/\W/gi, '').replace(/(.{4})/g, '$1 ');
+  });
+});
+
+$('#Card').on('copy cut paste', function () {
+  setTimeout(function () {
+    $('#Card').trigger("change");
+  });
+});  
+
+const inp = document.querySelector('#expiry')
+
+inp.onkeydown = function() {
+
+  const key = event.keyCode || event.charCode;
+  
+  if (key !== 8 && key !== 46 ) {
+    if (inp.value.length == 2) {
+        inp.value= (inp.value+'/');
+    }
+  }
+  
+  if (( key == 8 || key == 46 ) && inp.value.length === 4) {
+    inp.value = inp.value.slice(0,3)
+  }    
+};
+
+// function cardnumber(Card)
+// {
+//     var cardno=[0-9]; 
+//     if(Card.value.match(cardno))
+//     {
+//         return true;
+//     }
+//     else
+//     {
+//         alert("Please enter only numeric values.");
+//     }
+// }
+    </script>
+</body>
+</html>
